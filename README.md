@@ -1,0 +1,3 @@
+# probe402 archive chain heads
+
+Each row of `ARCHIVE-CHAIN.md` is the SHA-256 head of one sealed day of the probe402 archive: the hash of that day's manifest, which in turn carries the head of the day before it. To check a row, fetch `https://probe402.com/chain/<date>`, remove the single trailing newline byte, and take the SHA-256 of what remains: it must equal the row's `manifest_sha256`, and the next day's manifest must carry the same digest as its `prev_manifest_sha256`. Rows are added and never changed: probe402's daily anchor job refuses to push a table that does not begin with the one already here, so a row that differs anywhere in this repository's history is a discrepancy any clone can show.
